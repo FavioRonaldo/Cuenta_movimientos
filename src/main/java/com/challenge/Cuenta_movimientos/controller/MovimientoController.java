@@ -19,6 +19,7 @@ import com.challenge.Cuenta_movimientos.model.dto.MovimientoDto;
 import com.challenge.Cuenta_movimientos.model.entity.Movimiento;
 import com.challenge.Cuenta_movimientos.model.mappers.MovimientoMapper;
 import com.challenge.Cuenta_movimientos.model.payload.MensajeResponse;
+import com.challenge.Cuenta_movimientos.model.payload.SaldoInsuficiente;
 import com.challenge.Cuenta_movimientos.service.IMovimiento;
 
 
@@ -41,14 +42,20 @@ public class MovimientoController {
                     .object(movimientoMapper.toDTO(movimientoSave))
                     .build()
                     , HttpStatus.CREATED);
-        } catch (DataAccessException exDt) {
+        }catch (SaldoInsuficiente ex) {
             return new ResponseEntity<>(
                     MensajeResponse.builder()
-                            .mnesaje(exDt.getMessage())
-                            .object(null)
-                            .build()
-                    , HttpStatus.METHOD_NOT_ALLOWED);
-        }
+                    .mnesaje(ex.getMessage())
+                    .object(null)
+                    .build(), HttpStatus.BAD_REQUEST); 
+		}catch (DataAccessException exDt) {
+	            return new ResponseEntity<>(
+	                    MensajeResponse.builder()
+	                            .mnesaje(exDt.getMessage())
+	                            .object(null)
+	                            .build()
+	                    , HttpStatus.METHOD_NOT_ALLOWED);
+	        }
 	}
 	@PutMapping("movimiento/{id}")
 	public ResponseEntity<?> update(@RequestBody MovimientoDto movimientoDto,@PathVariable Integer id) {

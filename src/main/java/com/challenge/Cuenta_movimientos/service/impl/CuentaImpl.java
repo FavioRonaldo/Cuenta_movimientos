@@ -28,9 +28,9 @@ public class CuentaImpl implements ICuenta{
 	@Transactional
 	public Cuenta save(CuentaDto cuentadto) {
 	    // Convertir DTO a entidad
-		//System.out.println(cuentadto);
+		System.out.println(cuentadto);
 	    Cuenta cuenta = cuentaMapper.toEntity(cuentadto);
-	   // System.out.println("Cuenta mapeada: " + cuenta);
+	   System.out.println("Cuenta mapeada: " + cuenta);
 	    // Guardar la entidad   
 	    return cuentaDao.save(cuenta);
 	}

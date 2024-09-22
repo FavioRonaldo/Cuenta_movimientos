@@ -10,5 +10,6 @@ import org.springframework.data.repository.query.Param;
 import com.challenge.Cuenta_movimientos.model.entity.Cuenta;
 
 public interface CuentaDao extends JpaRepository<Cuenta, Integer>{
-
+	//@Query("SELECT numero_cuenta FROM Cuenta c WHERE c.numero_cuenta= :numero_cuenta")
+	Cuenta findByNumeroCuenta(Integer numero_cuenta);
 }

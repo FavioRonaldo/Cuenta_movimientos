@@ -1,5 +1,6 @@
 package com.challenge.Cuenta_movimientos.model.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import jakarta.persistence.Column;
@@ -18,8 +19,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name="movimiento")
-public class Movimiento {
+@Table(name= "movimiento")
+public class Movimiento implements Serializable{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +33,8 @@ public class Movimiento {
 	private Float Valor;
 	@Column(name="saldo")
 	private Float Saldo;
+	@Column(name="numero_cuenta")
+	private Integer Numero_cuenta;
 	
 	
 }

@@ -25,7 +25,7 @@ public class Cuenta implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	@Column(name="numero_cuenta")
-	private Integer Numero_cuenta;
+	private Integer numeroCuenta;
 	@Column(name="tipo")
 	private String Tipo;
 	@Column(name="saldo_Inicial")

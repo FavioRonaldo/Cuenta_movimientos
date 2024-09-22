@@ -14,7 +14,7 @@ public class CuentaDto implements Serializable{
 
 
 	private Integer Id;
-	private Integer Numero_cuenta;
+	private Integer numeroCuenta;
 	private String Tipo;
 	private Float Saldo_Inicial;
 	private Boolean Estado;
@@ -26,11 +26,11 @@ public class CuentaDto implements Serializable{
 	public void setId(Integer id) {
 		this.Id = id;
 	}
-	public Integer getNumero_cuenta() {
-		return Numero_cuenta;
+	public Integer getNumeroCuenta() {
+		return numeroCuenta;
 	}
-	public void setNumero_cuenta(Integer numero_cuenta) {
-		this.Numero_cuenta = numero_cuenta;
+	public void setNumeroCuenta(Integer numero_cuenta) {
+		this.numeroCuenta = numero_cuenta;
 	}
 	public String getTipo() {
 		return Tipo;
