@@ -1,4 +1,4 @@
-package com.challenge.Cuenta_movimientos.Cuenta_movimientos;
+package com.challenge.Cuenta_movimientos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
