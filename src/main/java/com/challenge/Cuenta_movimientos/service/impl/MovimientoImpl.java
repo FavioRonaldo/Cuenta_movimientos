@@ -1,5 +1,10 @@
 package com.challenge.Cuenta_movimientos.service.impl;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +14,7 @@ import com.challenge.Cuenta_movimientos.model.dao.MovimientoDao;
 import com.challenge.Cuenta_movimientos.model.dto.MovimientoDto;
 import com.challenge.Cuenta_movimientos.model.entity.Cuenta;
 import com.challenge.Cuenta_movimientos.model.entity.Movimiento;
+import com.challenge.Cuenta_movimientos.model.entity.Reporte;
 import com.challenge.Cuenta_movimientos.model.mappers.CuentaMapper;
 import com.challenge.Cuenta_movimientos.model.mappers.MovimientoMapper;
 import com.challenge.Cuenta_movimientos.model.payload.SaldoInsuficiente;
@@ -26,8 +32,8 @@ public class MovimientoImpl implements IMovimiento {
 	@Transactional
 	public Movimiento save(MovimientoDto movimientodto) {
 		 Movimiento movimiento = movimientoMapper.toEntity(movimientodto);
-		 Cuenta cuenta=cuentaDao.findByNumeroCuenta(movimiento.getNumero_cuenta());
-		 String tipoMovimiento=movimiento.getTipo_movimiento();
+		 Cuenta cuenta=cuentaDao.findByNumeroCuenta(movimiento.getNumeroCuenta());
+		 String tipoMovimiento=movimiento.getTipoMovimiento();
 		 float saldo=0;
 		 if(tipoMovimiento.equals("Deposito")) {
 			  saldo =cuenta.getSaldo_Inicial()+movimiento.getValor();
@@ -68,6 +74,32 @@ public class MovimientoImpl implements IMovimiento {
 	public Movimiento findById(Integer id) {
 		// TODO Auto-generated method stub
 		return movimientoDao.findById(id).orElse(null);
+	}
+
+	@Override
+	public List<Reporte> findAllByFechaBetween(LocalDate startDate, LocalDate endDate) {
+		// TODO Auto-generated method stub
+		List<Reporte> reporte = new ArrayList<>();
+		List<Movimiento> movimientos= movimientoDao.findAllByFechaBetween(startDate,endDate);
+		Iterator<Movimiento> iterator = movimientos.iterator();
+		while (iterator.hasNext()) {
+		    Movimiento movimiento = iterator.next();
+		    // Aquí puedes acceder a cada movimiento
+		    Cuenta cuenta=cuentaDao.findByNumeroCuenta(movimiento.getNumeroCuenta());
+		    float valorInicial=cuenta.getSaldo_Inicial()-movimiento.getValor();		    
+		    reporte.add(new Reporte(
+		    		movimiento.getFecha(),
+		    		cuenta.getCliente(),
+		    		movimiento.getNumeroCuenta(),
+		    		cuenta.getTipo(),
+		    		valorInicial,
+		    		cuenta.getEstado(),
+		    		movimiento.getValor(),
+		    		cuenta.getSaldo_Inicial()
+		    		));
+		}
+		System.out.println(reporte);
+		return reporte;
 	}
 
 }

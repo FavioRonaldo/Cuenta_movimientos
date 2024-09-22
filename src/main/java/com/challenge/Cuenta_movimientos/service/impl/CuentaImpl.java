@@ -32,13 +32,6 @@ public class CuentaImpl implements ICuenta{
 	    // Guardar la entidad   
 	    return cuentaDao.save(cuenta);
 	}
-	@Transactional(readOnly=true)
-	@Override
-	public Cuenta findByID(Integer numero_cuenta) {
-		// TODO Auto-generated method stub
-		
-		return cuentaDao.findById(numero_cuenta).orElse(null);
-	}
 	/*@Transactional(readOnly=true)
 	@Override
 	public List<Cuenta> findAllByFechaBetween(Date fechaInicio, Date fechaFin) {
@@ -57,7 +50,7 @@ public class CuentaImpl implements ICuenta{
 	        return cuentaDao.existsById(id);
 	    }
 	 @Transactional(readOnly = true)
-	    @Override
+	 @Override
 	    public Cuenta findById(Integer id) {
 	        return cuentaDao.findById(id).orElse(null);
 	    }

@@ -2,6 +2,7 @@ package com.challenge.Cuenta_movimientos.model.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,21 +21,25 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name= "movimiento")
-public class Movimiento implements Serializable{
-	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
-	@Column(name="fecha")
-	private Date Fecha;
-	@Column(name="tipo_movimiento")
-	private String Tipo_movimiento;
-	@Column(name="valor")
-	private Float Valor;
-	@Column(name="saldo")
-	private Float Saldo;
-	@Column(name="numero_cuenta")
-	private Integer Numero_cuenta;
-	
-	
+public class Movimiento implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "fecha")
+    private LocalDate fecha;
+
+    @Column(name = "tipo_movimiento")
+    private String tipoMovimiento;
+
+    @Column(name = "valor")
+    private Float valor;
+
+    @Column(name = "saldo")
+    private Float saldo;
+
+    @Column(name = "numero_cuenta")
+    private Integer numeroCuenta;
 }
+

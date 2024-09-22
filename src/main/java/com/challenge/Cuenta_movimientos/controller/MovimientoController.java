@@ -1,5 +1,8 @@
 package com.challenge.Cuenta_movimientos.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.challenge.Cuenta_movimientos.model.dao.MovimientoDao;
 import com.challenge.Cuenta_movimientos.model.dto.MovimientoDto;
 import com.challenge.Cuenta_movimientos.model.entity.Movimiento;
+import com.challenge.Cuenta_movimientos.model.entity.Reporte;
 import com.challenge.Cuenta_movimientos.model.mappers.MovimientoMapper;
 import com.challenge.Cuenta_movimientos.model.payload.MensajeResponse;
 import com.challenge.Cuenta_movimientos.model.payload.SaldoInsuficiente;
@@ -63,7 +67,7 @@ public class MovimientoController {
         try {
             if (movimientoService.existsById(id)) {
             	movimientoDto.setId(id);
-            	movimientoUpdate = movimientoService.save(movimientoDto);
+            	movimientoUpdate = movimientoService.save(movimientoDto); 	
                 return new ResponseEntity<>(MensajeResponse.builder()
                         .mnesaje("Guardado correctamente")
                         .object(movimientoMapper.toDTO(movimientoUpdate))
@@ -122,5 +126,23 @@ public class MovimientoController {
 	                        .build()
 	                , HttpStatus.OK);
 	    }
+	@GetMapping("reporte/{startDate}/{endDate}")
+	public ResponseEntity<?> showAllByFechaBetween(@PathVariable LocalDate startDate,@PathVariable LocalDate endDate) {
+		List<Reporte> movimiento = movimientoService.findAllByFechaBetween(startDate,endDate);
+	        if (movimiento == null) {
+	            return new ResponseEntity<>(
+	                    MensajeResponse.builder()
+	                            .mnesaje("El registro que intenta buscar, no existe!!")
+	                            .object(null)
+	                            .build()
+	                    , HttpStatus.NOT_FOUND);
+	        }
 
+	        return new ResponseEntity<>(
+	                MensajeResponse.builder()
+	                        .mnesaje("")
+	                        .object(movimiento)
+	                        .build()
+	                , HttpStatus.OK);
+	    }
 }
