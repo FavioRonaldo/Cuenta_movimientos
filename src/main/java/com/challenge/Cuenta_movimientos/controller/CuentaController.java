@@ -37,7 +37,6 @@ public class CuentaController {
 		Cuenta cuentaSave = null;
         try {
         	cuentaSave = cuentaService.save(cuentaDto);
-        	System.out.println("Cuenta guardada: " + cuentaSave);
             return new ResponseEntity<>(MensajeResponse.builder()
                     .mnesaje("Guardado correctamente")
                     .object(cuentaMapper.toDTO(cuentaSave))

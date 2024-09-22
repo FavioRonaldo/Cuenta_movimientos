@@ -37,9 +37,7 @@ public class MovimientoImpl implements IMovimiento {
 		 if(saldo>0) {
 			 cuenta.setSaldo_Inicial(saldo);
 			 	cuentaDao.save(cuenta);
-			 	System.out.println(movimiento);
 			 	movimiento.setSaldo(saldo);
-			 	System.out.println(movimiento);
 			    // Guardar la entidad   
 			    return movimientoDao.save(movimiento);
 		 }else {
