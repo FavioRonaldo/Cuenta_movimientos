@@ -31,7 +31,6 @@ public class CuentaController {
 	private ICuenta cuentaService;
 	@Autowired
 	private CuentaMapper cuentaMapper;
-	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("cuenta")
 	public ResponseEntity<?> create(@RequestBody CuentaDto cuentaDto) {		
 		Cuenta cuentaSave = null;
