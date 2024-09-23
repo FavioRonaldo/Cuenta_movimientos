@@ -84,9 +84,15 @@ public class MovimientoImpl implements IMovimiento {
 		Iterator<Movimiento> iterator = movimientos.iterator();
 		while (iterator.hasNext()) {
 		    Movimiento movimiento = iterator.next();
-		    // Aquí puedes acceder a cada movimiento
 		    Cuenta cuenta=cuentaDao.findByNumeroCuenta(movimiento.getNumeroCuenta());
-		    float valorInicial=cuenta.getSaldo_Inicial()-movimiento.getValor();		    
+		    String tipoMovimiento=movimiento.getTipoMovimiento();
+		    float valorInicial;
+		    Boolean isADeposit;
+		    isADeposit = tipoMovimiento.equals("Deposito");
+		    valorInicial = isADeposit
+				 ? cuenta.getSaldo_Inicial()-movimiento.getValor()
+				 : cuenta.getSaldo_Inicial()+movimiento.getValor();	
+			     
 		    reporte.add(new Reporte(
 		    		movimiento.getFecha(),
 		    		cuenta.getCliente(),
@@ -94,11 +100,10 @@ public class MovimientoImpl implements IMovimiento {
 		    		cuenta.getTipo(),
 		    		valorInicial,
 		    		cuenta.getEstado(),
-		    		movimiento.getValor(),
+		    		isADeposit ? movimiento.getValor() : (movimiento.getValor()*-1),
 		    		cuenta.getSaldo_Inicial()
 		    		));
 		}
-		System.out.println(reporte);
 		return reporte;
 	}
 

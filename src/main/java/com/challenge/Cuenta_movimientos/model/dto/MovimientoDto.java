@@ -18,5 +18,5 @@ public class MovimientoDto implements Serializable{
 	private String tipoMovimiento;
 	private Float Valor;
 	private Float Saldo;
-	private Integer Numero_cuenta;
+	private Integer numeroCuenta;
 }
