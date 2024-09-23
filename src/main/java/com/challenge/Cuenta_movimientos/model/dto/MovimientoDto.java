@@ -13,10 +13,10 @@ import lombok.ToString;
 @Builder
 public class MovimientoDto implements Serializable{
 	
-	private Integer Id;
-	private LocalDate Fecha;
+	private Integer id;
+	private LocalDate fecha;
 	private String tipoMovimiento;
-	private Float Valor;
-	private Float Saldo;
+	private Float valor;
+	private Float saldo;
 	private Integer numeroCuenta;
 }
