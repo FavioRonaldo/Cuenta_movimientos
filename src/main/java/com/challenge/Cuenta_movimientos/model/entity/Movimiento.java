@@ -30,7 +30,8 @@ public class Movimiento implements Serializable {
     @Column(name = "fecha")
     private LocalDate fecha;
 
-    @Column(name = "tipo_movimiento")
+    @Column(name="tipo_movimiento", columnDefinition = "VARCHAR(10) CHECK (tipo_movimiento IN ('DEPOSITO','RETIRO'))")
+    
     private String tipoMovimiento;
 
     @Column(name = "valor")
