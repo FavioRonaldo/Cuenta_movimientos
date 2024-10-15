@@ -22,7 +22,7 @@ import com.challenge.Cuenta_movimientos.model.dto.MovimientoDto;
 import com.challenge.Cuenta_movimientos.model.entity.Movimiento;
 import com.challenge.Cuenta_movimientos.model.entity.Reporte;
 import com.challenge.Cuenta_movimientos.model.mappers.MovimientoMapper;
-import com.challenge.Cuenta_movimientos.model.payload.MensajeResponse;
+import com.challenge.Cuenta_movimientos.model.payload.MensajeRespons;
 import com.challenge.Cuenta_movimientos.model.payload.SaldoInsuficiente;
 import com.challenge.Cuenta_movimientos.service.IMovimiento;
 
@@ -41,21 +41,21 @@ public class MovimientoController {
 		Movimiento movimientoSave = null;
         try {
         	movimientoSave = movimientoService.save(movimientoDto);
-            return new ResponseEntity<>(MensajeResponse.builder()
-                    .mnesaje("Guardado correctamente")
+            return new ResponseEntity<>(MensajeRespons.builder()
+                    .mensaje("Guardado correctamente")
                     .object(movimientoMapper.toDTO(movimientoSave))
                     .build()
                     , HttpStatus.CREATED);
         }catch (SaldoInsuficiente ex) {
             return new ResponseEntity<>(
-                    MensajeResponse.builder()
-                    .mnesaje(ex.getMessage())
+                    MensajeRespons.builder()
+                    .mensaje(ex.getMessage())
                     .object(null)
                     .build(), HttpStatus.BAD_REQUEST); 
 		}catch (DataAccessException exDt) {
 	            return new ResponseEntity<>(
-	                    MensajeResponse.builder()
-	                            .mnesaje(exDt.getMessage())
+	                    MensajeRespons.builder()
+	                            .mensaje(exDt.getMessage())
 	                            .object(null)
 	                            .build()
 	                    , HttpStatus.METHOD_NOT_ALLOWED);
@@ -68,23 +68,23 @@ public class MovimientoController {
             if (movimientoService.existsById(id)) {
             	movimientoDto.setId(id);
             	movimientoUpdate = movimientoService.save(movimientoDto); 	
-                return new ResponseEntity<>(MensajeResponse.builder()
-                        .mnesaje("Guardado correctamente")
+                return new ResponseEntity<>(MensajeRespons.builder()
+                        .mensaje("Guardado correctamente")
                         .object(movimientoMapper.toDTO(movimientoUpdate))
                         .build()
                         , HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(
-                        MensajeResponse.builder()
-                                .mnesaje("El registro que intenta actualizar no se encuentra en la base de datos.")
+                        MensajeRespons.builder()
+                                .mensaje("El registro que intenta actualizar no se encuentra en la base de datos.")
                                 .object(null)
                                 .build()
                         , HttpStatus.NOT_FOUND);
             }
         } catch (DataAccessException exDt) {
             return new ResponseEntity<>(
-                    MensajeResponse.builder()
-                            .mnesaje(exDt.getMessage())
+                    MensajeRespons.builder()
+                            .mensaje(exDt.getMessage())
                             .object(null)
                             .build()
                     , HttpStatus.METHOD_NOT_ALLOWED);
@@ -99,8 +99,8 @@ public class MovimientoController {
 	            return new ResponseEntity<>(movimientoDelete, HttpStatus.NO_CONTENT);
 	        } catch (DataAccessException exDt) {
 	            return new ResponseEntity<>(
-	                    MensajeResponse.builder()
-	                            .mnesaje(exDt.getMessage())
+	                    MensajeRespons.builder()
+	                            .mensaje(exDt.getMessage())
 	                            .object(null)
 	                            .build()
 	                    , HttpStatus.METHOD_NOT_ALLOWED);
@@ -112,16 +112,16 @@ public class MovimientoController {
 
 	        if (movimiento == null) {
 	            return new ResponseEntity<>(
-	                    MensajeResponse.builder()
-	                            .mnesaje("El registro que intenta buscar, no existe!!")
+	                    MensajeRespons.builder()
+	                            .mensaje("El registro que intenta buscar, no existe!!")
 	                            .object(null)
 	                            .build()
 	                    , HttpStatus.NOT_FOUND);
 	        }
 
 	        return new ResponseEntity<>(
-	                MensajeResponse.builder()
-	                        .mnesaje("")
+	                MensajeRespons.builder()
+	                        .mensaje("")
 	                        .object(movimientoMapper.toDTO(movimiento))
 	                        .build()
 	                , HttpStatus.OK);
@@ -131,16 +131,16 @@ public class MovimientoController {
 		List<Reporte> movimiento = movimientoService.findAllByFechaBetween(startDate,endDate);
 	        if (movimiento == null) {
 	            return new ResponseEntity<>(
-	                    MensajeResponse.builder()
-	                            .mnesaje("El registro que intenta buscar, no existe!!")
+	                    MensajeRespons.builder()
+	                            .mensaje("El registro que intenta buscar, no existe!!")
 	                            .object(null)
 	                            .build()
 	                    , HttpStatus.NOT_FOUND);
 	        }
 
 	        return new ResponseEntity<>(
-	                MensajeResponse.builder()
-	                        .mnesaje("")
+	                MensajeRespons.builder()
+	                        .mensaje("")
 	                        .object(movimiento)
 	                        .build()
 	                , HttpStatus.OK);

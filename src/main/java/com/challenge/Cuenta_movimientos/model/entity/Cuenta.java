@@ -23,16 +23,16 @@ public class Cuenta implements Serializable{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
+	private Integer id;
 	@Column(name="numero_cuenta")
 	private Integer numeroCuenta;
 	@Column(name="tipo")
-	private String Tipo;
+	private String tipo;
 	@Column(name="saldo_Inicial")
-	private Float Saldo_Inicial;
+	private Float saldo_Inicial;
 	@Column(name="estado")
-	private Boolean Estado;
+	private Boolean estado;
 	@Column(name="cliente")
-	private String Cliente;	
+	private String cliente;	
 	
 }

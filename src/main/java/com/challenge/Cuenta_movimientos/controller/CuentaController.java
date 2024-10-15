@@ -1,8 +1,5 @@
 package com.challenge.Cuenta_movimientos.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -15,13 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.Cuenta_movimientos.model.dto.CuentaDto;
 import com.challenge.Cuenta_movimientos.model.entity.Cuenta;
 import com.challenge.Cuenta_movimientos.model.mappers.CuentaMapper;
-import com.challenge.Cuenta_movimientos.model.payload.MensajeResponse;
+import com.challenge.Cuenta_movimientos.model.payload.MensajeRespons;
 import com.challenge.Cuenta_movimientos.service.ICuenta;
 
 @RestController
@@ -36,15 +32,15 @@ public class CuentaController {
 		Cuenta cuentaSave = null;
         try {
         	cuentaSave = cuentaService.save(cuentaDto);
-            return new ResponseEntity<>(MensajeResponse.builder()
-                    .mnesaje("Guardado correctamente")
+            return new ResponseEntity<>(MensajeRespons.builder()
+                    .mensaje("Guardado correctamente")
                     .object(cuentaMapper.toDTO(cuentaSave))
                     .build()
                     , HttpStatus.CREATED);
         } catch (DataAccessException exDt) {
             return new ResponseEntity<>(
-                    MensajeResponse.builder()
-                            .mnesaje(exDt.getMessage())
+                    MensajeRespons.builder()
+                            .mensaje(exDt.getMessage())
                             .object(null)
                             .build()
                     , HttpStatus.METHOD_NOT_ALLOWED);
@@ -57,23 +53,23 @@ public class CuentaController {
             if (cuentaService.existsById(id)) {
             	cuentadto.setId(id);
                 cuentaUpdate = cuentaService.save(cuentadto);
-                return new ResponseEntity<>(MensajeResponse.builder()
-                        .mnesaje("Guardado correctamente")
+                return new ResponseEntity<>(MensajeRespons.builder()
+                        .mensaje("Guardado correctamente")
                         .object(cuentaMapper.toDTO(cuentaUpdate))
                         .build()
                         , HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(
-                        MensajeResponse.builder()
-                                .mnesaje("El registro que intenta actualizar no se encuentra en la base de datos.")
+                        MensajeRespons.builder()
+                                .mensaje("El registro que intenta actualizar no se encuentra en la base de datos.")
                                 .object(null)
                                 .build()
                         , HttpStatus.NOT_FOUND);
             }
         } catch (DataAccessException exDt) {
             return new ResponseEntity<>(
-                    MensajeResponse.builder()
-                            .mnesaje(exDt.getMessage())
+                    MensajeRespons.builder()
+                            .mensaje(exDt.getMessage())
                             .object(null)
                             .build()
                     , HttpStatus.METHOD_NOT_ALLOWED);
@@ -88,8 +84,8 @@ public class CuentaController {
 	            return new ResponseEntity<>(cuentaDelete, HttpStatus.NO_CONTENT);
 	        } catch (DataAccessException exDt) {
 	            return new ResponseEntity<>(
-	                    MensajeResponse.builder()
-	                            .mnesaje(exDt.getMessage())
+	                    MensajeRespons.builder()
+	                            .mensaje(exDt.getMessage())
 	                            .object(null)
 	                            .build()
 	                    , HttpStatus.METHOD_NOT_ALLOWED);
@@ -101,16 +97,16 @@ public class CuentaController {
 
 	        if (cuenta == null) {
 	            return new ResponseEntity<>(
-	                    MensajeResponse.builder()
-	                            .mnesaje("El registro que intenta buscar, no existe!!")
+	                    MensajeRespons.builder()
+	                            .mensaje("El registro que intenta buscar, no existe!!")
 	                            .object(null)
 	                            .build()
 	                    , HttpStatus.NOT_FOUND);
 	        }
 
 	        return new ResponseEntity<>(
-	                MensajeResponse.builder()
-	                        .mnesaje("")
+	                MensajeRespons.builder()
+	                        .mensaje("")
 	                        .object(cuentaMapper.toDTO(cuenta))
 	                        .build()
 	                , HttpStatus.OK);

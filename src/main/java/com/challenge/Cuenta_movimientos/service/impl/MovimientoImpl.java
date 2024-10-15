@@ -101,7 +101,8 @@ public class MovimientoImpl implements IMovimiento {
 		    		valorInicial,
 		    		cuenta.getEstado(),
 		    		isADeposit ? movimiento.getValor() : (movimiento.getValor()*-1),
-		    		cuenta.getSaldo_Inicial()
+		    		cuenta.getSaldo_Inicial(),
+		    		movimiento.getTipoMovimiento()
 		    		));
 		}
 		return reporte;

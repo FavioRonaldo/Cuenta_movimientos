@@ -13,18 +13,18 @@ import lombok.ToString;
 public class CuentaDto implements Serializable{
 
 
-	private Integer Id;
+	private Integer id;
 	private Integer numeroCuenta;
-	private String Tipo;
-	private Float Saldo_Inicial;
-	private Boolean Estado;
-	private String Cliente;
+	private String tipo;
+	private Float saldo_Inicial;
+	private Boolean estado;
+	private String cliente;
 	
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 	public void setId(Integer id) {
-		this.Id = id;
+		this.id = id;
 	}
 	public Integer getNumeroCuenta() {
 		return numeroCuenta;
@@ -33,28 +33,28 @@ public class CuentaDto implements Serializable{
 		this.numeroCuenta = numero_cuenta;
 	}
 	public String getTipo() {
-		return Tipo;
+		return tipo;
 	}
 	public void setTipo(String tipo) {
-		this.Tipo = tipo;
+		this.tipo = tipo;
 	}
 	public Float getSaldo_Inicial() {
-		return Saldo_Inicial;
+		return saldo_Inicial;
 	}
 	public void setSaldo_Inicial(Float saldo_Inicial) {
-		this.Saldo_Inicial = saldo_Inicial;
+		this.saldo_Inicial = saldo_Inicial;
 	}
 	public Boolean getEstado() {
-		return Estado;
+		return estado;
 	}
 	public void setEstado(Boolean estado) {
-		this.Estado = estado;
+		this.estado = estado;
 	}
 	public String getCliente() {
-		return Cliente;
+		return cliente;
 	}
 	public void setCliente(String cliente) {
-		this.Cliente = cliente;
+		this.cliente = cliente;
 	}	
 	
 }
