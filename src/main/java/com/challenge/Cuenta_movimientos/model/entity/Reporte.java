@@ -4,24 +4,26 @@ import java.time.LocalDate;
 
 public class Reporte {
 	private LocalDate fecha;
-    private String Cliente;
+    private String cliente;
     private Integer numeroCuenta;
-    private String Tipo;
+    private String tipo;
     private Float saldoInicial;
-    private Boolean Estado;
+    private Boolean estado;
     private Float valor;
-    private Float Saldo_Inicial;
+    private Float saldo_Inicial;
+    private String tipo_movimiento;
 
     // Constructor
-    public Reporte(LocalDate fecha, String cliente, Integer numeroCuenta, String tipo, Float saldoInicial, Boolean estado, Float movimiento, Float saldoDisponible) {
+    public Reporte(LocalDate fecha, String cliente, Integer numeroCuenta, String tipo, Float saldoInicial, Boolean estado, Float movimiento, Float saldoDisponible, String tipo_movimiento) {
         this.fecha = fecha;
-        this.Cliente = cliente;
+        this.cliente = cliente;
         this.numeroCuenta = numeroCuenta;
-        this.Tipo = tipo;
+        this.tipo = tipo;
         this.saldoInicial = saldoInicial;
-        this.Estado = estado;
+        this.estado = estado;
         this.valor = movimiento;
-        this.Saldo_Inicial = saldoDisponible;
+        this.saldo_Inicial = saldoDisponible;
+        this.tipo_movimiento= tipo_movimiento;
     }
 
 	// Getters y setters
@@ -34,11 +36,11 @@ public class Reporte {
     }
 
     public String getCliente() {
-        return Cliente;
+        return cliente;
     }
 
     public void setCliente(String cliente) {
-        this.Cliente = cliente;
+        this.cliente = cliente;
     }
 
     public Integer getNumeroCuenta() {
@@ -50,11 +52,11 @@ public class Reporte {
     }
 
     public String getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public void setTipo(String tipo) {
-        this.Tipo = tipo;
+        this.tipo = tipo;
     }
 
     public Float getSaldoInicial() {
@@ -66,11 +68,11 @@ public class Reporte {
     }
 
     public Boolean getEstado() {
-        return Estado;
+        return estado;
     }
 
     public void setEstado(Boolean estado) {
-        this.Estado = estado;
+        this.estado = estado;
     }
 
     public Float getMovimiento() {
@@ -82,11 +84,18 @@ public class Reporte {
     }
 
     public Float getSaldoDisponible() {
-        return Saldo_Inicial;
+        return saldo_Inicial;
     }
 
     public void setSaldoDisponible(Float saldoDisponible) {
-        this.Saldo_Inicial = saldoDisponible;
+        this.saldo_Inicial = saldoDisponible;
+    }
+    public String getTipo_movimiento() {
+        return tipo_movimiento;
+    }
+
+    public void setTipo_movimiento(String tipo_movimiento) {
+        this.tipo_movimiento = tipo_movimiento;
     }
 
     // Método toString para visualizar el reporte
@@ -94,13 +103,14 @@ public class Reporte {
     public String toString() {
         return "{\n" +
                 "\"Fecha\":\"" + fecha + "\",\n" +
-                "\"Cliente\":\"" + Cliente + "\",\n" +
+                "\"Cliente\":\"" + cliente + "\",\n" +
                 "\"Numero Cuenta\":\"" + numeroCuenta + "\",\n" +
-                "\"Tipo\":\"" + Tipo + "\",\n" +
+                "\"Tipo\":\"" + tipo + "\",\n" +
                 "\"Saldo Inicial\":" + saldoInicial + ",\n" +
-                "\"Estado\":" + Estado + ",\n" +
+                "\"Estado\":" + estado + ",\n" +
                 "\"Movimiento\":" + valor + ",\n" +
-                "\"Saldo Disponible\":" + Saldo_Inicial + "\n" +
+                "\"Saldo Disponible\":" + saldo_Inicial + "\n" +
+                "\"Tipo de Movimiento\":" + tipo_movimiento + "\n" +
                 "}";
     }
 }
